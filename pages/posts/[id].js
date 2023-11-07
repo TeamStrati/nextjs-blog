@@ -3,23 +3,31 @@ import { getAllPostIds, getPostData } from '../../lib/posts';
 import Head from 'next/head';
 import Date from '../../components/date';
 import utilStyles from '../../styles/utils.module.css';
-
+import Image from 'next/image';
 
 
 export default function Post({ postData }) {
   return (
+    <>
     <Layout>
       <Head>
         <title>{postData.title}</title>
       </Head>
+      <Image       
+    src={postData.banner}
+    width={1250/2}
+    height={500/2}
+    alt="Article Banner"
+  />
       <article>
         <h1 className={utilStyles.headingXl}>{postData.title}</h1>
         <div className={utilStyles.lightText}>
-          <Date dateString={postData.date}/> - {postData.author}
+        📅 <Date dateString={postData.date}/> - 👤{postData.author}
         </div>
         <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
       </article>
     </Layout>
+    </>
   );
 }
 
